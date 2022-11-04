@@ -9,24 +9,25 @@ export class RecipeService {
 
     recipesChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [
-        new Recipe(
-            'A Test Recipe', 
-            'This is simply a test', 
-            'https://upload.wikimedia.org/wikipedia/commons/6/65/Libum_Sweet_Cheesecake_ingredients_%26_recipe_%288411812870%29.jpg',
-            [
-                new Ingredient('Meat', 1),
-                new Ingredient('Fries', 20)
-            ]),
-          new Recipe(
-            'Another Test Recipe', 
-            'This is simply a test', 
-            'https://upload.wikimedia.org/wikipedia/commons/6/65/Libum_Sweet_Cheesecake_ingredients_%26_recipe_%288411812870%29.jpg',
-            [
-                new Ingredient('Buns', 2),
-                new Ingredient('Meat', 1)
-            ])
-        ];
+    private recipes: Recipe[] = [];
+    // private recipes: Recipe[] = [
+    //     new Recipe(
+    //         'A Test Recipe', 
+    //         'This is simply a test', 
+    //         'https://upload.wikimedia.org/wikipedia/commons/6/65/Libum_Sweet_Cheesecake_ingredients_%26_recipe_%288411812870%29.jpg',
+    //         [
+    //             new Ingredient('Meat', 1),
+    //             new Ingredient('Fries', 20)
+    //         ]),
+    //       new Recipe(
+    //         'Another Test Recipe', 
+    //         'This is simply a test', 
+    //         'https://upload.wikimedia.org/wikipedia/commons/6/65/Libum_Sweet_Cheesecake_ingredients_%26_recipe_%288411812870%29.jpg',
+    //         [
+    //             new Ingredient('Buns', 2),
+    //             new Ingredient('Meat', 1)
+    //         ])
+    //     ];
 
     constructor(private shoppingListService: ShoppingListService) {}
 
@@ -36,6 +37,11 @@ export class RecipeService {
 
     getRecipes() {
         return this.recipes.slice();
+    }
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
     }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
